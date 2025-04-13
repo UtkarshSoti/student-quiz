@@ -1,69 +1,81 @@
 body {
     font-family: "Poppins", sans-serif;
     margin: 0;
-    background-color: #f4f5f7;
-    color: #111;
+    padding: 0;
+    background-color: #f3f4f6;
   }
   
   .quiz-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
+    text-align: center;
   }
   
   .header {
-    text-align: center;
     margin-bottom: 20px;
   }
   
   .logo {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
   }
   
   .card {
-    background-color: white;
+    background: white;
     padding: 20px;
-    margin: 10px 0;
+    margin-bottom: 20px;
     border-radius: 12px;
-    max-width: 500px;
-    width: 100%;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
   }
   
   .small-card {
     max-width: 400px;
+    margin: 0 auto 20px auto;
   }
   
-  h1, h2 {
-    margin: 0 0 20px;
-    font-size: 24px;
-    color: #333;
+  .card h1, .card h2, .card p {
+    margin: 10px 0;
   }
   
   input {
     padding: 12px;
-    font-size: 16px;
-    width: calc(100% - 24px);
-    margin-bottom: 15px;
+    width: 80%;
+    margin-top: 10px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
+    font-size: 1.2rem;
   }
   
   button {
-    padding: 14px 20px;
-    font-size: 16px;
+    padding: 12px 20px;
+    border: none;
     background-color: #4f46e5;
     color: white;
-    border: none;
     border-radius: 8px;
+    font-size: 1.1rem;
     cursor: pointer;
-    margin-top: 10px;
+    margin: 8px;
   }
   
   button:hover {
-    background-color: #3730a3;
+    background-color: #4338ca;
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .option-button {
+    padding: 14px 20px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.2s ease;
   }
   
   .progress-bar {
@@ -77,112 +89,95 @@ body {
   .progress-bar-inner {
     height: 100%;
     background-color: #4f46e5;
-    transition: width 0.3s;
-  }
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 20px 0;
-  }
-  
-  .option-button {
-    padding: 14px;
-    font-size: 16px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    text-align: center;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .option-button:hover {
-    background-color: #f3f4f6;
+    transition: width 0.3s ease;
   }
   
   .score-block {
-    text-align: center;
+    margin-top: 20px;
   }
   
   .footer {
-    font-size: 12px;
+    font-size: 0.9rem;
+    color: #6b7280;
     margin-top: 30px;
     text-align: center;
-    color: #888;
   }
   
-  /* Responsive adjustments */
-  
-  @media (max-width: 400px) {
+  /* 🎨 Responsive Mobile Styling */
+  @media (max-width: 480px) {
     .quiz-container {
       padding: 10px;
-      max-width: 100%;
     }
   
-    h1 {
-      font-size: 26px;
-      margin: 12px 0;
-    }
-  
-    h2 {
-      font-size: 22px;
-      margin: 10px 0;
-    }
-  
-    .logo {
-      width: 36px;
-      height: 36px;
+    .header h1 {
+      font-size: 1.4rem;
     }
   
     .card {
-      padding: 14px;
-      margin: 8px 0;
-    }
-  
-    .small-card {
-      padding: 16px;
+      padding: 15px;
     }
   
     input {
-      font-size: 20px;
-      padding: 14px;
+      padding: 10px;
       width: 100%;
+      font-size: 1.1rem;
     }
   
-    button, .option-button {
-      font-size: 20px;
-      padding: 16px 20px;
-      margin: 6px 0;
+    button {
+      padding: 10px 16px;
+      font-size: 1rem;
     }
   
     .option-button {
-      display: block;
-      width: 100%;
+      padding: 12px;
+      font-size: 1.1rem;
     }
   
-    .question-info {
-      font-size: 20px;
-      margin: 12px 0;
+    .card h1 {
+      font-size: 1.3rem;
     }
   
-    .progress-bar {
-      height: 8px;
-      margin-bottom: 12px;
+    .card h2 {
+      font-size: 1.2rem;
+    }
+  
+    .card p, .question-info {
+      font-size: 1.1rem;
     }
   
     .footer {
-      font-size: 12px;
-      padding: 8px;
-      margin-top: 20px;
+      font-size: 0.8rem;
+    }
+  }
+  
+  /* 📱 Optimized for 360px phones */
+  @media (max-width: 360px) {
+    .header h1 {
+      font-size: 1.2rem;
     }
   
-    ul {
-      padding-left: 20px;
+    input {
+      font-size: 1rem;
     }
   
-    li {
-      font-size: 18px;
-      margin-bottom: 6px;
+    button {
+      font-size: 0.95rem;
     }
-  } 
+  
+    .option-button {
+      font-size: 1rem;
+    }
+  
+    .card h1, .card h2 {
+      font-size: 1.1rem;
+    }
+  
+    .card p, .question-info {
+      font-size: 1rem;
+    }
+  
+    .footer {
+      font-size: 0.7rem;
+    }
+  }
   
