@@ -240,6 +240,9 @@ export default function StudentQuiz() {
           </ul>
         </div>
       )}
+      <footer style={{ marginTop: '2rem', padding: '1rem', textAlign: 'center', fontSize: '0.875rem', color: '#6b7280' }}>
+  © 2024 Cube Root Classes. Created by Utkarsh Soti. All rights reserved.
+</footer>
     </div>
   );
 }
