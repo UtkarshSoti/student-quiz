@@ -102,23 +102,27 @@ export default function StudentQuiz() {
   }, []);
 
   const handleAnswer = (option) => {
-    let newScore = score; 
-if (option === quizData[currentQuestion].answer) {
-  newScore = score + 1;
-  setScore(newScore);
-}
-
-setTimeout(() => {
-  setSelected(null);
-  const next = currentQuestion + 1;
-  if (next < quizData.length) {
-    setCurrentQuestion(next);
-  } else {
-    setShowScore(true);
-    submitScore(newScore);  // Pass final score
-  }
-}, 800);
+    if (selected !== null) return;
+  
+    setSelected(option);
+    let updatedScore = score;
+    if (option === quizData[currentQuestion].answer) {
+      updatedScore = score + 1;
+      setScore(updatedScore);
+    }
+  
+    setTimeout(() => {
+      setSelected(null);
+      const next = currentQuestion + 1;
+      if (next < quizData.length) {
+        setCurrentQuestion(next);
+      } else {
+        setShowScore(true);
+        submitScore(updatedScore);  // ✅ pass the correct final score
+      }
+    }, 800);
   };
+  
 
   const resetQuiz = () => {
     setCurrentQuestion(0);
@@ -157,7 +161,8 @@ setTimeout(() => {
     } catch (e) {
       console.error("Error saving to Firebase", e);
     }
-  };  
+  };
+    
 
   const fetchLeaderboard = async () => {
     try {
