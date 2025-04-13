@@ -1,134 +1,154 @@
-.quiz-container {
-    min-height: 100vh;
-    background-color: #f3f4f6;
-    padding: 1rem;
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    background-color: #f4f5f7;
+    color: #111;
+  }
+  
+  .quiz-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
   }
   
   .header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
   }
   
   .logo {
-    width: 48px;
-    height: 48px;
+    width: 60px;
+    height: 60px;
   }
   
   .card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 1rem;
+    background-color: white;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 12px;
+    max-width: 500px;
     width: 100%;
-    max-width: 480px;
-    margin-bottom: 1.5rem;
-    box-sizing: border-box;
-    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   }
   
   .small-card {
-    padding: 1.5rem;
+    max-width: 400px;
+  }
+  
+  h1, h2 {
+    margin: 0 0 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  input {
+    padding: 12px;
+    font-size: 16px;
+    width: calc(100% - 24px);
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  button {
+    padding: 14px 20px;
+    font-size: 16px;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #3730a3;
+  }
+  
+  .progress-bar {
+    height: 10px;
+    background-color: #e5e7eb;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar-inner {
+    height: 100%;
+    background-color: #4f46e5;
+    transition: width 0.3s;
   }
   
   .options {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 12px;
+    margin: 20px 0;
   }
   
   .option-button {
-    padding: 1.2rem;
-    font-size: 1.4rem;
-    border-radius: 0.75rem;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .progress-bar {
-    height: 10px;
-    background: #e5e7eb;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-  }
-  
-  .progress-bar-inner {
-    background: #4f46e5;
-    height: 100%;
-  }
-  
-  .question-info {
-    margin: 0.75rem 0;
-    font-size: 1.4rem;
-    font-weight: 500;
-    line-height: 1.5;
-  }
-  
-  input {
-    padding: 0.9rem;
-    font-size: 1.3rem;
-    width: 100%;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-  }
-  
-  button {
-    padding: 0.9rem 1.5rem;
-    font-size: 1.2rem;
-    background: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    margin-top: 0.5rem;
-  }
-  
-  button:hover {
-    background: #4338ca;
-  }
-  
-  footer.footer {
-    margin-top: 2rem;
-    padding: 1rem;
+    padding: 14px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
     text-align: center;
-    font-size: 1rem;
-    color: #6b7280;
+    transition: background-color 0.3s, transform 0.2s;
   }
   
-  /* Mobile-first adjustments */
+  .option-button:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .score-block {
+    text-align: center;
+  }
+  
+  .footer {
+    font-size: 12px;
+    margin-top: 30px;
+    text-align: center;
+    color: #888;
+  }
+  
+  /* Responsive adjustments */
+  
   @media (max-width: 480px) {
-    .header h1 {
-      font-size: 1.6rem;
+    h1, h2 {
+      font-size: 22px;
     }
   
-    .option-button {
-      font-size: 1.6rem;
-      padding: 1.2rem;
-    }
-  
-    .question-info {
-      font-size: 1.5rem;
+    .logo {
+      width: 48px;
+      height: 48px;
     }
   
     input {
-      font-size: 1.4rem;
-      padding: 1rem;
+      font-size: 18px;
+      padding: 14px;
     }
   
     button {
-      font-size: 1.3rem;
-      padding: 1rem 1.5rem;
+      font-size: 18px;
+      padding: 16px 22px;
     }
   
-    footer.footer {
-      font-size: 0.9rem;
+    .option-button {
+      font-size: 18px;
+      padding: 16px;
+    }
+  
+    .card {
+      padding: 16px;
+      margin: 10px 0;
+    }
+  
+    .quiz-container {
+      padding: 10px;
+    }
+  
+    .footer {
+      font-size: 10px;
     }
   }
   
