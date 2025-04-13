@@ -113,42 +113,76 @@ body {
   
   /* Responsive adjustments */
   
-  @media (max-width: 480px) {
-    h1, h2 {
+  @media (max-width: 400px) {
+    .quiz-container {
+      padding: 10px;
+      max-width: 100%;
+    }
+  
+    h1 {
+      font-size: 26px;
+      margin: 12px 0;
+    }
+  
+    h2 {
       font-size: 22px;
-    }
-  
-    .logo {
-      width: 48px;
-      height: 48px;
-    }
-  
-    input {
-      font-size: 18px;
-      padding: 14px;
-    }
-  
-    button {
-      font-size: 18px;
-      padding: 16px 22px;
-    }
-  
-    .option-button {
-      font-size: 18px;
-      padding: 16px;
-    }
-  
-    .card {
-      padding: 16px;
       margin: 10px 0;
     }
   
-    .quiz-container {
-      padding: 10px;
+    .logo {
+      width: 36px;
+      height: 36px;
+    }
+  
+    .card {
+      padding: 14px;
+      margin: 8px 0;
+    }
+  
+    .small-card {
+      padding: 16px;
+    }
+  
+    input {
+      font-size: 20px;
+      padding: 14px;
+      width: 100%;
+    }
+  
+    button, .option-button {
+      font-size: 20px;
+      padding: 16px 20px;
+      margin: 6px 0;
+    }
+  
+    .option-button {
+      display: block;
+      width: 100%;
+    }
+  
+    .question-info {
+      font-size: 20px;
+      margin: 12px 0;
+    }
+  
+    .progress-bar {
+      height: 8px;
+      margin-bottom: 12px;
     }
   
     .footer {
-      font-size: 10px;
+      font-size: 12px;
+      padding: 8px;
+      margin-top: 20px;
     }
-  }
+  
+    ul {
+      padding-left: 20px;
+    }
+  
+    li {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+  } 
   
