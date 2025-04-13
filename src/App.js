@@ -176,10 +176,10 @@ export default function StudentQuiz() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#f3f4f6", padding: "1rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
-    <h1 style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "1rem", color: "#4f46e5" }}>Cube Root Classes</h1>
+    <div style={{ minHeight: '100vh', backgroundColor: '#f3f4f6', padding: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    
       {!quizStarted ? (
-        <div style={{ background: "white", padding: "2rem", borderRadius: "1rem", maxWidth: "400px", width: "100%", marginBottom: "1.5rem", textAlign: "center" }}>
+        <div style={{ background: "white", padding: window.innerWidth < 480 ? '1rem' : '2rem', borderRadius: "1rem", maxWidth: "400px", width: "100%", marginBottom: "1.5rem", textAlign: "center" }}>
           <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Enter Your Name to Start</h1>
           <input
             placeholder="Your name"
@@ -190,8 +190,15 @@ export default function StudentQuiz() {
           <button onClick={() => studentName && setQuizStarted(true)} style={{ padding: "0.5rem 1rem", backgroundColor: "#4f46e5", color: "white", border: "none", borderRadius: "0.5rem" }}>Start Quiz</button>
         </div>
       ) : (
-        <div style={{ background: "white", padding: "2rem", borderRadius: "1rem", maxWidth: "600px", width: "100%", marginBottom: "1.5rem" }}>
-          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Motion Quiz</h1>
+        <div style={{ background: "white", padding: window.innerWidth < 480 ? '1rem' : '2rem', borderRadius: "1rem", maxWidth: "600px", width: "100%", marginBottom: "1.5rem" }}>
+          <h1 style={{ fontSize: window.innerWidth < 480 ? '1.25rem' : '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Motion Quiz</h1>
+<div style={{ height: '8px', background: '#e5e7eb', borderRadius: '4px', overflow: 'hidden', marginBottom: '1rem' }}>
+  <div style={{
+    width: `${(currentQuestion / quizData.length) * 100}%`,
+    background: '#4f46e5',
+    height: '100%'
+  }}></div>
+</div>
           {showScore ? (
             <div style={{ textAlign: "center" }}>
               <p style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{studentName}, you scored {score} out of {quizData.length}</p>
@@ -200,14 +207,17 @@ export default function StudentQuiz() {
           ) : (
             <div>
               <p style={{ marginBottom: "1rem", fontWeight: "500" }}>{quizData[currentQuestion].question}</p>
-              <div style={{ display: "grid", gap: "0.5rem" }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {quizData[currentQuestion].options.map((option, index) => (
                   <button
                     key={index}
                     onClick={() => handleAnswer(option)}
                     disabled={selected !== null}
                     style={{
-                      padding: "0.5rem 1rem",
+                      padding: '0.75rem 1rem',
+                      transition: 'all 0.2s ease',
+                      transform: selected === option ? 'scale(0.98)' : 'scale(1)',
+                      cursor: selected === null ? 'pointer' : 'default',
                       borderRadius: "0.5rem",
                       border: "1px solid #ccc",
                       backgroundColor:
@@ -224,7 +234,7 @@ export default function StudentQuiz() {
                 ))}
               </div>
               <p style={{ marginTop: "1rem", fontSize: "0.875rem", color: "gray" }}>Question {currentQuestion + 1} of {quizData.length}</p>
-              <p style={{ marginTop: "0.5rem", fontSize: "0.875rem", fontWeight: "bold", color: "#dc2626" }}>Time left: {timeLeft}s</p>
+              <p style={{ marginTop: '0.5rem', fontSize: window.innerWidth < 480 ? '0.75rem' : '0.875rem', fontWeight: 'bold', color: timeLeft <= 5 ? '#dc2626' : '#4f46e5' }}>Time left: {timeLeft}s</p>
             </div>
           )}
         </div>
@@ -240,9 +250,9 @@ export default function StudentQuiz() {
           </ul>
         </div>
       )}
-      <footer style={{ marginTop: '2rem', padding: '1rem', textAlign: 'center', fontSize: '0.875rem', color: '#6b7280' }}>
+    <footer style={{ marginTop: '2rem', padding: '1rem', textAlign: 'center', fontSize: window.innerWidth < 480 ? '0.75rem' : '0.875rem', color: '#6b7280' }}>
   © 2024 Cube Root Classes. Created by Utkarsh Soti. All rights reserved.
 </footer>
-    </div>
+</div>
   );
 }
