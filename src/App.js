@@ -102,22 +102,22 @@ export default function StudentQuiz() {
   }, []);
 
   const handleAnswer = (option) => {
-    if (selected !== null) return;
+    let newScore = score; 
+if (option === quizData[currentQuestion].answer) {
+  newScore = score + 1;
+  setScore(newScore);
+}
 
-    setSelected(option);
-    if (option === quizData[currentQuestion].answer) {
-      setScore(score + 1);
-    }
-    setTimeout(() => {
-      setSelected(null);
-      const next = currentQuestion + 1;
-      if (next < quizData.length) {
-        setCurrentQuestion(next);
-      } else {
-        setShowScore(true);
-        submitScore();
-      }
-    }, 800);
+setTimeout(() => {
+  setSelected(null);
+  const next = currentQuestion + 1;
+  if (next < quizData.length) {
+    setCurrentQuestion(next);
+  } else {
+    setShowScore(true);
+    submitScore(newScore);  // Pass final score
+  }
+}, 800);
   };
 
   const resetQuiz = () => {
@@ -128,7 +128,7 @@ export default function StudentQuiz() {
     setQuizStarted(false);
   };
 
-  const submitScore = async () => {
+  const submitScore = async (finalScore) => {
     if (!studentName) return;
   
     try {
@@ -143,14 +143,13 @@ export default function StudentQuiz() {
       });
   
       if (existingDoc) {
-        // Update only if the new score is better
-        if (score > existingDoc.data().score) {
-          await updateDoc(existingDoc.ref, { score });
+        if (finalScore > existingDoc.data().score) {
+          await updateDoc(existingDoc.ref, { score: finalScore });
         }
       } else {
         await addDoc(scoresCollection, {
           name: studentName,
-          score: score,
+          score: finalScore,
         });
       }
   
@@ -158,8 +157,7 @@ export default function StudentQuiz() {
     } catch (e) {
       console.error("Error saving to Firebase", e);
     }
-  };
-  
+  };  
 
   const fetchLeaderboard = async () => {
     try {
