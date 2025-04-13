@@ -1,70 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./firebase";
-import { updateDoc } from "firebase/firestore";
-
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { updateDoc, collection, addDoc, getDocs } from "firebase/firestore";
+import "./QuizApp.css";
 
 const initialQuizData = [
-  {
-    question: "What is motion in one dimension?",
-    options: ["Motion along a straight line", "Motion along a curve", "Circular motion", "Random motion"],
-    answer: "Motion along a straight line",
-    timeLimit: 10,
-  },
-  {
-    question: "Which physical quantity is defined as the total path length travelled by a body?",
-    options: ["Displacement", "Distance", "Speed", "Velocity"],
-    answer: "Distance",
-    timeLimit: 10,
-  },
-  {
-    question: "Average velocity can be calculated by: (i) (u+v)/2 (ii) uv/2 (iii) -(v-u)/2 (iv) -(u-v)/2",
-    options: ["(i)", "(ii)", "(iii)", "(iv)"],
-    answer: "(i)",
-    timeLimit: 10,
-  },
-  {
-    question: "If a car moves 100 meters north and then 100 meters south, what is the displacement?",
-    options: ["200 meters", "0 meters", "100 meters", "50 meters"],
-    answer: "0 meters",
-    timeLimit: 10,
-  },
-  {
-    question: "An object moving in a circular path with uniform speed experiences a continuous change in its",
-    options: ["direction", "velocity", "speed", "both a & b"],
-    answer: "both a & b",
-    timeLimit: 10,
-  },
-  {
-    question: "Speed of an object is equal to the magnitude of velocity if-",
-    options: ["the object is travelling in uniform circular motion", "the object is travelling along a straight path", "the initial and final positions are same", "None of these"],
-    answer: "the object is travelling along a straight path",
-    timeLimit: 10,
-  },
-  {
-    question: "A cyclist riding a bicycle at a constant speed of 10 m/s on a circular track. The cyclist completes the three rounds of a track in 6 minutes. What is the radius of the circular track?",
-    options: ["191 m", "573 m", "282 m", "151 m"],
-    answer: "191 m",
-    timeLimit: 30,
-  },
-  {
-    question: "Which of these is correct for acceleration?",
-    options: ["Change of speed only", "Change of direction only", "Change of both speed and direction", "None of these"],
-    answer: "Change of both speed and direction",
-    timeLimit: 10,
-  },
-  {
-    question: "If a body covers equal distances in equal intervals of time, it is said to be in:",
-    options: ["Uniform motion", "Non-uniform motion", "Accelerated motion", "Decelerated motion"],
-    answer: "Uniform motion",
-    timeLimit: 10,
-  },
-  {
-    question: "What is the acceleration of a body moving with constant velocity?",
-    options: ["Positive", "Negative", "Zero", "Changing"],
-    answer: "Zero",
-    timeLimit: 10,
-  },
+  // (your same quiz data here)
 ];
 
 export default function StudentQuiz() {
@@ -95,7 +35,6 @@ export default function StudentQuiz() {
   useEffect(() => {
     setTimeLeft(quizData[currentQuestion].timeLimit);
   }, [currentQuestion, quizData]);
-  
 
   useEffect(() => {
     fetchLeaderboard();
@@ -103,14 +42,14 @@ export default function StudentQuiz() {
 
   const handleAnswer = (option) => {
     if (selected !== null) return;
-  
+
     setSelected(option);
     let updatedScore = score;
     if (option === quizData[currentQuestion].answer) {
       updatedScore = score + 1;
       setScore(updatedScore);
     }
-  
+
     setTimeout(() => {
       setSelected(null);
       const next = currentQuestion + 1;
@@ -118,11 +57,10 @@ export default function StudentQuiz() {
         setCurrentQuestion(next);
       } else {
         setShowScore(true);
-        submitScore(updatedScore);  // ✅ pass the correct final score
+        submitScore(updatedScore);
       }
     }, 800);
   };
-  
 
   const resetQuiz = () => {
     setCurrentQuestion(0);
@@ -134,35 +72,27 @@ export default function StudentQuiz() {
 
   const submitScore = async (finalScore) => {
     if (!studentName) return;
-  
     try {
       const scoresCollection = collection(db, "scores");
       const querySnapshot = await getDocs(scoresCollection);
-  
       let existingDoc = null;
       querySnapshot.forEach((doc) => {
         if (doc.data().name === studentName) {
           existingDoc = doc;
         }
       });
-  
       if (existingDoc) {
         if (finalScore > existingDoc.data().score) {
           await updateDoc(existingDoc.ref, { score: finalScore });
         }
       } else {
-        await addDoc(scoresCollection, {
-          name: studentName,
-          score: finalScore,
-        });
+        await addDoc(scoresCollection, { name: studentName, score: finalScore });
       }
-  
       fetchLeaderboard();
     } catch (e) {
       console.error("Error saving to Firebase", e);
     }
   };
-    
 
   const fetchLeaderboard = async () => {
     try {
@@ -176,83 +106,82 @@ export default function StudentQuiz() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f3f4f6', padding: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    
+    <div className="quiz-container">
+      <div className="header">
+        <img src="https://img.icons8.com/fluency/48/education.png" alt="Cube Root Classes" className="logo" />
+        <h1>Cube Root Classes</h1>
+      </div>
+
       {!quizStarted ? (
-        <div style={{ background: "white", padding: window.innerWidth < 480 ? '1rem' : '2rem', borderRadius: "1rem", maxWidth: "400px", width: "100%", marginBottom: "1.5rem", textAlign: "center" }}>
-          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "1rem" }}>Enter Your Name to Start</h1>
+        <div className="card small-card">
+          <h1>Enter Your Name to Start</h1>
           <input
             placeholder="Your name"
-            style={{ padding: "0.5rem", marginBottom: "1rem", width: "100%" }}
             value={studentName}
             onChange={(e) => setStudentName(e.target.value)}
           />
-          <button onClick={() => studentName && setQuizStarted(true)} style={{ padding: "0.5rem 1rem", backgroundColor: "#4f46e5", color: "white", border: "none", borderRadius: "0.5rem" }}>Start Quiz</button>
+          <button onClick={() => studentName && setQuizStarted(true)}>Start Quiz</button>
         </div>
       ) : (
-        <div style={{ background: "white", padding: window.innerWidth < 480 ? '1rem' : '2rem', borderRadius: "1rem", maxWidth: "600px", width: "100%", marginBottom: "1.5rem" }}>
-          <h1 style={{ fontSize: window.innerWidth < 480 ? '1.25rem' : '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Motion Quiz</h1>
-<div style={{ height: '8px', background: '#e5e7eb', borderRadius: '4px', overflow: 'hidden', marginBottom: '1rem' }}>
-  <div style={{
-    width: `${(currentQuestion / quizData.length) * 100}%`,
-    background: '#4f46e5',
-    height: '100%'
-  }}></div>
-</div>
+        <div className="card">
+          <h1>Motion Quiz</h1>
+          <div className="progress-bar">
+            <div
+              className="progress-bar-inner"
+              style={{ width: `${(currentQuestion / quizData.length) * 100}%` }}
+            ></div>
+          </div>
           {showScore ? (
-            <div style={{ textAlign: "center" }}>
-              <p style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{studentName}, you scored {score} out of {quizData.length}</p>
-              <button style={{ marginTop: "1rem", padding: "0.5rem 1rem", backgroundColor: "#4f46e5", color: "white", border: "none", borderRadius: "0.5rem" }} onClick={resetQuiz}>Try Again</button>
+            <div className="score-block">
+              <p>{studentName}, you scored {score} out of {quizData.length}</p>
+              <button onClick={resetQuiz}>Try Again</button>
             </div>
           ) : (
             <div>
-              <p style={{ marginBottom: "1rem", fontWeight: "500" }}>{quizData[currentQuestion].question}</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <p className="question-info">{quizData[currentQuestion].question}</p>
+              <div className="options">
                 {quizData[currentQuestion].options.map((option, index) => (
                   <button
                     key={index}
                     onClick={() => handleAnswer(option)}
                     disabled={selected !== null}
+                    className="option-button"
                     style={{
-                      padding: '0.75rem 1rem',
-                      transition: 'all 0.2s ease',
-                      transform: selected === option ? 'scale(0.98)' : 'scale(1)',
-                      cursor: selected === null ? 'pointer' : 'default',
-                      borderRadius: "0.5rem",
-                      border: "1px solid #ccc",
                       backgroundColor:
                         selected === option
                           ? option === quizData[currentQuestion].answer
                             ? "#16a34a"
                             : "#dc2626"
                           : "white",
-                      color: selected === option ? "white" : "black"
+                      color: selected === option ? "white" : "black",
+                      transform: selected === option ? 'scale(0.98)' : 'scale(1)'
                     }}
                   >
                     {option}
                   </button>
                 ))}
               </div>
-              <p style={{ marginTop: "1rem", fontSize: "0.875rem", color: "gray" }}>Question {currentQuestion + 1} of {quizData.length}</p>
-              <p style={{ marginTop: '0.5rem', fontSize: window.innerWidth < 480 ? '0.75rem' : '0.875rem', fontWeight: 'bold', color: timeLeft <= 5 ? '#dc2626' : '#4f46e5' }}>Time left: {timeLeft}s</p>
+              <p className="question-info">Question {currentQuestion + 1} of {quizData.length}</p>
+              <p className="question-info" style={{ color: timeLeft <= 5 ? '#dc2626' : '#4f46e5' }}>Time left: {timeLeft}s</p>
             </div>
           )}
         </div>
       )}
 
       {leaderboard.length > 0 && (
-        <div style={{ background: "white", padding: "1.5rem", borderRadius: "1rem", maxWidth: "600px", width: "100%", marginBottom: "1.5rem" }}>
-          <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", marginBottom: "1rem" }}>Leaderboard</h2>
+        <div className="card">
+          <h2>Leaderboard</h2>
           <ul>
             {leaderboard.map((entry, index) => (
-              <li key={index} style={{ marginBottom: "0.25rem" }}>{index + 1}. {entry.name}: {entry.score}</li>
+              <li key={index}>{index + 1}. {entry.name}: {entry.score}</li>
             ))}
           </ul>
         </div>
       )}
-    <footer style={{ marginTop: '2rem', padding: '1rem', textAlign: 'center', fontSize: window.innerWidth < 480 ? '0.75rem' : '0.875rem', color: '#6b7280' }}>
-  © 2024 Cube Root Classes. Created by Utkarsh Soti. All rights reserved.
-</footer>
-</div>
+
+      <footer className="footer">
+        © 2024 Cube Root Classes. Created by Utkarsh Soti. All rights reserved.
+      </footer>
+    </div>
   );
 }
