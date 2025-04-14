@@ -1,183 +1,360 @@
+/* General Body Styles */
 body {
-    font-family: "Poppins", sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f3f4f6;
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f6fa; /* Light grey background */
+}
+
+/* Main Container */
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh; /* Ensure it takes full viewport height */
+  padding: 20px;
+}
+
+/* Header and Logo */
+.header {
+  text-align: center;
+  color: #4f46e5;
+  font-size: 1.6rem;
+  margin-bottom: -30px; /* Increased bottom margin */
+  font-family: 'Pacifico', cursive;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px; /* Add space below logo if used */
+}
+
+/* Headings */
+h1, h2 {
+  margin: 0 0 15px;
+  margin-bottom: -30px;
+  color: #333; /* Dark grey for general headings */
+}
+
+/* Card Styling */
+.card {
+  background-color: #ffffff;
+  padding: 25px 30px; /* Adjusted padding */
+  border-radius: 16px; /* Slightly larger radius */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Softer shadow */
+  width: 100%;
+  max-width: 550px; /* Adjusted max-width */
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Specific Card for Subject Selection/Name Input */
+.small-card {
+  max-width: 480px; /* Adjusted size */
+}
+
+/* Card Title (e.g., Quiz Subject) */
+.card h1 {
+  font-size: 1.8rem; /* Adjusted size */
+  color: #4f46e5; /* Keep brand color */
+  margin-bottom: 20px;
+}
+
+/* General Button Styling Inside Card (e.g., Start Quiz, Try Again) */
+.card button {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 12px 25px; /* Adjusted padding */
+  margin: 10px 5px; /* Vertical margin added */
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500; /* Medium weight */
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 5px rgba(79, 70, 229, 0.2); /* Subtle shadow */
+}
+
+.card button:hover {
+  background-color: #4338ca;
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
+}
+
+/* Input Field Styling */
+.card input {
+  padding: 12px 15px;
+  margin: 15px 0 20px; /* Added bottom margin */
+  border-radius: 8px;
+  border: 1px solid #d1d5db; /* Lighter border */
+  width: 90%;
+  max-width: 320px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.card input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+/* Options Container */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Reduced gap slightly */
+  margin: 25px 0;
+}
+
+/* Option Buttons */
+.option-button {
+  display: block;
+  width: 100%;
+  padding: 15px; /* Adjusted padding */
+  border: 2px solid #e5e7eb; /* Lighter border */
+  border-radius: 12px;
+  font-size: 1.1rem; /* Adjusted font size */
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #374151; /* Darker text */
+  text-align: left;
+  box-shadow: none; /* Removed shadow for cleaner look */
+  transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+}
+
+.option-button:hover:not(:disabled) {
+  background-color: #f9fafb; /* Very light grey on hover */
+  border-color: #d1d5db;
+  color: #374151;
+}
+
+.option-button:active:not(:disabled) {
+    transform: scale(0.99); /* Slight shrink on click */
+}
+
+
+.option-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+/* Style for selected option before feedback */
+.option-button.selected {
+   border-color: #4f46e5;
+   background-color: #eef2ff;
+}
+
+/* === Subject Button Layout Container === */
+.subject-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px; /* Space between buttons */
+  margin: 20px auto; /* Center container and add vertical margin */
+  padding: 10px 0;
+  max-width: 450px; /* Limit container width (adjust as needed) */
+  /* 3 buttons * 130px width + 2 * 15px gap = 390 + 30 = 420px. 450px gives some room */
+}
+
+/* === Individual Subject Buttons === */
+.subject-button {
+  /* --- Layout & Size --- */
+  width: 130px; /* *** Fixed width for uniform size *** */
+  box-sizing: border-box; /* Include padding/border in width */
+  text-align: center; /* Center text inside button */
+
+  /* --- Appearance --- */
+  padding: 12px 15px; /* Adjusted padding */
+  border: 2px solid #4f46e5;
+  background-color: #ffffff;
+  color: #4f46e5;
+  font-size: 1rem; /* Adjusted font size */
+  font-weight: 600;
+  border-radius: 10px; /* Match other buttons */
+  cursor: pointer;
+  transition: all 0.2s ease; /* Faster transition */
+}
+
+/* === Corrected Hover State for Subject Buttons === */
+.subject-button:hover {
+  background-color: #4f46e5; /* Purple background (matches the border) */
+  color: #ffffff;           /* Explicitly set text color to white */
+  border-color: #4f46e5;     /* Keep border color consistent */
+  transform: translateY(-2px); /* Keep the lift effect */
+}
+
+/* You should also ensure the :active state keeps the text white */
+.subject-button:active {
+  transform: translateY(0);    /* Reset lift effect on click */
+  background-color: #4338ca; /* Slightly darker purple background on click */
+  border-color: #4338ca;     /* Match border to background on click */
+  color: #ffffff;           /* Ensure text remains white on click */
+}
+
+/* --- REMOVED the nth-child(4) rule that forced full width --- */
+
+/* Question Text Info */
+.question-info {
+  margin: 15px 0;
+  font-size: 1.1rem; /* Adjusted size */
+  color: #374151; /* Darker grey */
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Progress Bar */
+.progress-bar {
+  background-color: #e5e7eb;
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 25px 0;
+  height: 10px; /* Slimmer bar */
+}
+
+.progress-bar-inner {
+  background-color: #4f46e5;
+  height: 100%;
+  border-radius: 50px; /* Match outer radius */
+  transition: width 0.4s ease-in-out;
+}
+
+/* Score Block */
+.score-block {
+    padding: 20px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.score-block button { /* Style the Try Again button */
+     margin-top: 15px;
+}
+
+
+/* Leaderboard Styles */
+.leaderboard-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 15px 0 0; /* Add top margin */
+  text-align: left;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Increased gap */
+  padding: 12px 5px; /* Added horizontal padding */
+  font-size: 1rem; /* Adjusted size */
+  border-bottom: 1px solid #f3f4f6; /* Separator line */
+}
+.leaderboard-item:last-child {
+    border-bottom: none; /* Remove border for last item */
+}
+
+.leaderboard-name {
+    font-weight: 500; /* Make name slightly bolder */
+    flex-grow: 1; /* Allow name to take available space */
+    color: #374151;
+}
+
+/* Badges for top 3 */
+.badge {
+  display: inline-flex;
+  flex-shrink: 0; /* Prevent badge from shrinking */
+  width: 26px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #a5b4fc; /* Default badge color */
+  color: #3730a3;
+  font-size: 0.85rem;
+}
+
+/* Specific Rank Colors */
+.rank-1 { background-color: #fbbf24; color: #92400e; } /* Gold */
+.rank-2 { background-color: #d1d5db; color: #374151; } /* Silver */
+.rank-3 { background-color: #f59e0b; color: #92400e; } /* Bronze */
+
+
+/* Footer */
+.footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #9ca3af; /* Lighter grey */
+  margin-top: 40px;
+  padding: 0 10px 20px; /* Add horizontal padding */
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 480px) {
   .quiz-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
+    padding: 10px; /* Reduced padding */
   }
-  
-  .header {
-    margin-bottom: 20px;
+
+  .header h1 {
+    font-size: 1.5rem; /* Smaller heading */
   }
-  
-  .logo {
-    width: 50px;
-    height: 50px;
-  }
-  
+
   .card {
-    background: white;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 20px 15px; /* Reduced padding */
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
   }
-  
-  .small-card {
-    max-width: 400px;
-    margin: 0 auto 20px auto;
+
+  .card h1 {
+    font-size: 1.4rem;
   }
-  
-  .card h1, .card h2, .card p {
-    margin: 10px 0;
+
+  .card button {
+    padding: 11px 18px;
+    font-size: 0.95rem;
   }
-  
-  input {
-    padding: 12px;
-    width: 80%;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1.2rem;
+
+  .card input {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    max-width: 95%;
   }
-  
-  button {
-    padding: 12px 20px;
-    border: none;
-    background-color: #4f46e5;
-    color: white;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    margin: 8px;
-  }
-  
-  button:hover {
-    background-color: #4338ca;
-  }
-  
+
   .options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 20px 0;
+      gap: 10px;
   }
-  
+
   .option-button {
-    padding: 14px 20px;
-    font-size: 1.2rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    transition: all 0.2s ease;
+    padding: 12px 14px;
+    font-size: 1rem;
   }
-  
-  .progress-bar {
-    height: 10px;
-    background-color: #e5e7eb;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 20px;
+
+  .subject-buttons {
+     gap: 10px; /* Reduce gap */
+     max-width: 100%; /* Allow full width */
   }
-  
-  .progress-bar-inner {
-    height: 100%;
-    background-color: #4f46e5;
-    transition: width 0.3s ease;
+
+  .subject-button {
+    /* Adjust width for 2 per row */
+    width: calc(50% - 10px); /* (100% / 2 buttons) - gap */
+    font-size: 0.95rem;
   }
-  
-  .score-block {
-    margin-top: 20px;
+
+  /* --- REMOVED the nth-child(4) rule here too --- */
+
+  .question-info {
+    font-size: 1rem;
   }
-  
-  .footer {
-    font-size: 0.9rem;
-    color: #6b7280;
-    margin-top: 30px;
-    text-align: center;
-  }
-  
-  /* 🎨 Responsive Mobile Styling */
-  @media (max-width: 480px) {
-    .quiz-container {
-      padding: 10px;
-    }
-  
-    .header h1 {
-      font-size: 1.4rem;
-    }
-  
-    .card {
-      padding: 15px;
-    }
-  
-    input {
-      padding: 10px;
-      width: 100%;
-      font-size: 1.1rem;
-    }
-  
-    button {
-      padding: 10px 16px;
-      font-size: 1rem;
-    }
-  
-    .option-button {
-      padding: 12px;
-      font-size: 1.1rem;
-    }
-  
-    .card h1 {
-      font-size: 1.3rem;
-    }
-  
-    .card h2 {
-      font-size: 1.2rem;
-    }
-  
-    .card p, .question-info {
-      font-size: 1.1rem;
-    }
-  
-    .footer {
-      font-size: 0.8rem;
-    }
-  }
-  
-  /* 📱 Optimized for 360px phones */
-  @media (max-width: 360px) {
-    .header h1 {
-      font-size: 1.2rem;
-    }
-  
-    input {
-      font-size: 1rem;
-    }
-  
-    button {
+
+  .leaderboard-item {
       font-size: 0.95rem;
-    }
-  
-    .option-button {
-      font-size: 1rem;
-    }
-  
-    .card h1, .card h2 {
-      font-size: 1.1rem;
-    }
-  
-    .card p, .question-info {
-      font-size: 1rem;
-    }
-  
-    .footer {
-      font-size: 0.7rem;
-    }
+      gap: 10px;
   }
-  
+  .badge {
+      width: 24px;
+      height: 24px;
+      font-size: 0.8rem;
+  }
+
+  .footer {
+    font-size: 0.8rem;
+    margin-top: 30px;
+  }
+}
