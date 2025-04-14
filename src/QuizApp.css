@@ -20,7 +20,8 @@ body {
   text-align: center;
   color: #4f46e5;
   font-size: 1.6rem;
-  margin-bottom: -30px; /* Increased bottom margin */
+  /* You might want to adjust this negative margin too if spacing still feels off */
+  margin-bottom: -60px; /* Reduced negative margin slightly */
   font-family: 'Pacifico', cursive;
 }
 
@@ -32,9 +33,12 @@ body {
 
 /* Headings */
 h1, h2 {
+  /* *** CORRECTED THIS RULE *** */
+  /* Removed the negative margin-bottom */
+  /* Restored original intended margin or use browser default */
   margin: 0 0 15px;
-  margin-bottom: -30px;
   color: #333; /* Dark grey for general headings */
+  font-family: 'Poppins', cursive;
 }
 
 /* Card Styling */
@@ -46,6 +50,7 @@ h1, h2 {
   width: 100%;
   max-width: 550px; /* Adjusted max-width */
   margin-bottom: 25px;
+  margin-top: 30px; /* Added margin-top to ensure space below header */
   text-align: center;
 }
 
@@ -54,11 +59,11 @@ h1, h2 {
   max-width: 480px; /* Adjusted size */
 }
 
-/* Card Title (e.g., Quiz Subject) */
+/* Card Title (e.g., Quiz Subject) - This h1 has its own specific margin */
 .card h1 {
   font-size: 1.8rem; /* Adjusted size */
   color: #4f46e5; /* Keep brand color */
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* This specific margin is fine */
 }
 
 /* General Button Styling Inside Card (e.g., Start Quiz, Try Again) */
@@ -85,7 +90,8 @@ h1, h2 {
 /* Input Field Styling */
 .card input {
   padding: 12px 15px;
-  margin: 15px 0 20px; /* Added bottom margin */
+  /* This margin provides space above (15px) and below (20px) the input */
+  margin: 15px 0 20px;
   border-radius: 8px;
   border: 1px solid #d1d5db; /* Lighter border */
   width: 90%;
@@ -121,13 +127,13 @@ h1, h2 {
   color: #374151; /* Darker text */
   text-align: left;
   box-shadow: none; /* Removed shadow for cleaner look */
-  transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.1s, color 0.2s;
 }
 
 .option-button:hover:not(:disabled) {
   background-color: #f9fafb; /* Very light grey on hover */
   border-color: #d1d5db;
-  color: #374151;
+  color: #374151; /* Ensure text stays dark grey */
 }
 
 .option-button:active:not(:disabled) {
@@ -155,7 +161,6 @@ h1, h2 {
   margin: 20px auto; /* Center container and add vertical margin */
   padding: 10px 0;
   max-width: 450px; /* Limit container width (adjust as needed) */
-  /* 3 buttons * 130px width + 2 * 15px gap = 390 + 30 = 420px. 450px gives some room */
 }
 
 /* === Individual Subject Buttons === */
@@ -192,8 +197,6 @@ h1, h2 {
   border-color: #4338ca;     /* Match border to background on click */
   color: #ffffff;           /* Ensure text remains white on click */
 }
-
-/* --- REMOVED the nth-child(4) rule that forced full width --- */
 
 /* Question Text Info */
 .question-info {
@@ -293,18 +296,31 @@ h1, h2 {
     padding: 10px; /* Reduced padding */
   }
 
-  .header h1 {
+  .header {
+      margin-bottom: 0; /* Adjust header margin for mobile */
+  }
+
+  .header h1 { /* Target h1 inside header specifically for mobile */
     font-size: 1.5rem; /* Smaller heading */
+    margin-bottom: 10px; /* Ensure some space below header h1 */
   }
 
   .card {
     padding: 20px 15px; /* Reduced padding */
     border-radius: 12px;
+    margin-top: 20px; /* Adjust card top margin for mobile */
   }
 
   .card h1 {
     font-size: 1.4rem;
+    margin-bottom: 15px; /* Adjust h1 margin inside card for mobile */
   }
+
+   /* Ensure h2 inside card has appropriate margin on mobile */
+  .card h2 {
+      margin-bottom: 15px; /* Add default bottom margin for h2 inside card */
+  }
+
 
   .card button {
     padding: 11px 18px;
@@ -315,10 +331,12 @@ h1, h2 {
     font-size: 0.95rem;
     padding: 10px 12px;
     max-width: 95%;
+    margin: 10px 0 15px; /* Adjust input margin for mobile */
   }
 
   .options {
       gap: 10px;
+      margin: 20px 0; /* Adjust options margin */
   }
 
   .option-button {
@@ -329,6 +347,7 @@ h1, h2 {
   .subject-buttons {
      gap: 10px; /* Reduce gap */
      max-width: 100%; /* Allow full width */
+     margin: 15px auto; /* Adjust subject buttons margin */
   }
 
   .subject-button {
@@ -337,10 +356,9 @@ h1, h2 {
     font-size: 0.95rem;
   }
 
-  /* --- REMOVED the nth-child(4) rule here too --- */
-
   .question-info {
     font-size: 1rem;
+    margin: 10px 0; /* Adjust question info margin */
   }
 
   .leaderboard-item {

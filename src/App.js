@@ -260,7 +260,7 @@ export default function StudentQuiz() {
          // Name Input Screen
         <div className="card small-card">
            <h1>{selectedSubject} Quiz</h1>
-           <h2 style={{ fontSize: '1.1rem', color: 'black', fontWeight: '500' }}>Enter Your Name to Start</h2>
+           <h2 style={{ fontSize: '1.5rem', color: 'black', fontWeight: '500' }}>Enter Your Name to Start</h2>
            <input
             type="text" // Explicitly set type
             placeholder="Your name"
